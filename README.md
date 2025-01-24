@@ -26,17 +26,17 @@ Examples
 
 int main(int argc, char** argv) {
 
-  /* Stack objects are created using "$" */
-  var i0 = $(Int, 5);
-  var i1 = $(Int, 3);
-  var i2 = $(Int, 4);
+  /* Stack objects are created using "u" */
+  var i0 = u(Int, 5);
+  var i1 = u(Int, 3);
+  var i2 = u(Int, 4);
 
   /* Heap objects are created using "new" */
   var items = new(Array, Int, i0, i1, i2);
   
   /* Collections can be looped over */
   foreach (item in items) {
-    print("Object %$ is of type %$\n",
+    print("Object %u is of type %u\n",
       item, type_of(item));
   }
   
@@ -52,14 +52,14 @@ int main(int argc, char** argv) {
   
   /* Shorthand $ can be used for basic types */
   var prices = new(Table, String, Int);
-  set(prices, $S("Apple"),  $I(12)); 
-  set(prices, $S("Banana"), $I( 6)); 
-  set(prices, $S("Pear"),   $I(55)); 
+  set(prices, uS("Apple"),  uI(12)); 
+  set(prices, uS("Banana"), uI( 6)); 
+  set(prices, uS("Pear"),   uI(55)); 
 
   /* Tables also support iteration */
   foreach (key in prices) {
     var val = get(prices, key);
-    print("Price of %$ is %$\n", key, val);
+    print("Price of %u is %u\n", key, val);
   }
   
   return 0;
@@ -94,16 +94,16 @@ More Examples
 int main(int argc, char** argv) {
 
   var items = new(Array, Int, 
-    $I( 8), $I( 5), $I(20), 
-    $I(15), $I(16), $I(98));
+    uI( 8), uI( 5), uI(20), 
+    uI(15), uI(16), uI(98));
 
   /* Iterate over indices using "range" */
-  foreach (i in range($I(len(items)))) {
+  foreach (i in range(uI(len(items)))) {
     print("Item Range %i is %i\n", i, get(items, i));
   }
 
   /* Iterate over every other item with "slice" */ 
-  foreach (item in slice(items, _, _, $I(2))) {
+  foreach (item in slice(items, _, _, uI(2))) {
     print("Item Slice %i\n", item);
   }
   
@@ -125,8 +125,8 @@ var Point = Cello(Point);
 int main(int argc, char** argv) {
   
   /* Create on Stack or Heap */
-  var p0 = $(Point, 0.0, 1.0);
-  var p1 = new(Point, $(Point, 0.0, 2.0));
+  var p0 = u(Point, 0.0, 1.0);
+  var p1 = new(Point, u(Point, 0.0, 2.0));
   
   /* It can be shown, compared, hashed, etc...
   **
@@ -135,8 +135,8 @@ int main(int argc, char** argv) {
   ** cmp: 1
   ** hash: 2849275892l
   */ 
-  print("p0: %$\np1: %$\ncmp: %i\nhash: %ul\n",
-    p0, p1, $I(cmp(p0, p1)), $I(hash(p0)));
+  print("p0: %u\np1: %u\ncmp: %i\nhash: %ul\n",
+    p0, p1, uI(cmp(p0, p1)), uI(hash(p0)));
   
   /* And collected by the GC when out of scope */
   return 0;
